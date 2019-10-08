@@ -1,0 +1,93 @@
+/* ===================================================================== 
+  CSS Grid Layout
+======================================================================== */
+
+.wrapper > div {
+    border: .2px solid rgba(198,198,198,.4);
+    padding: 1em 1.5em 1em 1.5em;
+    color: rgb(103,102,102);
+  }.wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 70px 60px repeat(9, minmax(150px, auto));
+    grid-template-areas: 
+      "topNav topNav topNav topNav topNav topNav topNav"
+      "sidebar sidebar sidebar sidebar sidebar sidebar sidebar"
+      "main main main main main main main"
+      "lineChart lineChart lineChart lineChart lineChart lineChart lineChart"
+      "barsChart barsChart barsChart barsChart barsChart barsChart barsChart"
+      "doughnutChart doughnutChart doughnutChart doughnutChart doughnutChart doughnutChart doughnutChart"
+      "socialStats socialStats socialStats socialStats socialStats socialStats socialStats"
+      "newMembers newMembers newMembers newMembers newMembers newMembers newMembers"
+      "recentActivities recentActivities recentActivities recentActivities recentActivities recentActivities recentActivities"
+      "messageUser messageUser messageUser messageUser messageUser messageUser messageUser"
+      "settings settings settings settings settings settings settings";
+  }
+
+  .topNav {
+    grid-area: topNav;
+  }
+  .sidebar {
+    grid-area: sidebar;
+  }
+  .main {
+    grid-area: main;
+  }
+  .lineChart {
+    grid-area: lineChart;
+  }
+  .barsChart {
+    grid-area: barsChart;
+  }
+  .doughnutChart {
+    grid-area: doughnutChart;
+  }
+  .socialStats {
+    grid-area: socialStats;
+  }
+  .newMembers {
+    grid-area: newMembers;
+  }
+  .recentActivities {
+    grid-area: recentActivities;
+  }
+  .messageUser {
+    grid-area: messageUser;
+  }
+  .settings {
+    grid-area: settings;
+  }
+
+.social-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  grid-gap: 35px;
+}
+
+
+@media (min-width: 768px) {
+
+  .wrapper > div {
+    border: .2px solid rgba(198,198,198,.4);
+    padding: 1em 1.5em 1em 1.5em;
+  }.wrapper {
+    display: grid;
+    grid-template-columns: 88px repeat(6, 1fr);
+    grid-template-rows: 70px repeat(6, minmax(80px, auto));
+    grid-template-areas: 
+      "topNav topNav topNav topNav topNav topNav topNav"
+      "sidebar main main main main main main"
+      "sidebar lineChart lineChart lineChart lineChart lineChart lineChart"
+      "sidebar barsChart barsChart barsChart doughnutChart doughnutChart doughnutChart"
+      "sidebar socialStats socialStats socialStats socialStats socialStats socialStats"
+      "sidebar newMembers newMembers newMembers recentActivities recentActivities recentActivities"
+      "sidebar messageUser messageUser messageUser settings settings settings";
+  }
+ 
+  .social-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 35px;
+  }
+  
+}

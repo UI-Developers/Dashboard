@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard</title>
+	<link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,700&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/grid.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/css-toggle-switch@latest/dist/toggle-switch.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="wrapper"><!-- wrapper -->
+  
+  <div class="topNav">
+    <header class="main-header">
+      <div class="clearfix">
+        <h1 class="name"><a href="#">Your<span id="logoFont">App&trade;</span></a></h1>
+        <div class="avatar-details">
+          <img class="icon-bell" src="icons/icon-bell.svg">
+          <!-- <div id="notifications">container element for our notifications</div> --> 
+          <span class="separator"></span>
+          <img class="img-avatar" src="images/member-3.jpg" alt="member">
+          <span class="name-avatar">Amy Hill</span>
+        </div>
+      </div>
+    </header><!--/.main-header-->
+  </div><!--/.topNav-->
+
+  <div class="sidebar"><!-- Sidebar -->
+    <nav>
+      <ul>
+        <li>
+          <a href="#"><img src="icons/icon-dashboard.svg" onerror="this.onerror=null; this.src='icons/icon-dashboard.svg'"></a>
+        </li>
+        <li>
+          <a href="#"><img src="icons/icon-members.svg" onerror="this.onerror=null; this.src='icons/icon-members.svg'"></a>
+        </li>
+        <li>
+          <a href="#"><img src="icons/icon-visits.svg" onerror="this.onerror=null; this.src='icons/icon-visits.svg'"></a>
+        </li>
+        <li>
+          <a href="#"><img src="icons/icon-settings.svg" onerror="this.onerror=null; this.src='icons/icon-settings.svg'"></a>
+        </li>
+      </ul>
+    </nav>
+  </div><!-- End Sidebar -->
+
+  <div class="main">
+    <h2 class="headline">Dashboard</h2>  
+    <div class="searchContainer">
+      <div class="searchForm">
+        <input id="search" name="search" placeholder="Search" type="search">
+      </div>
+    </div>
+    <div class="alert" id="alert">
+      <!-- js will insert alert here .... -->
+    </div>
+  </div><!--main-->
+
+  <div class="lineChart">
+    <h3>Traffic</h3>
+    <nav>
+      <ul class="traffic-nav">
+        <li class="traffic-nav-link"><a id="hourly" href="#">Hourly</a></li>
+        <li class="traffic-nav-link"><a id="daily" href="#">Daily</a></li>
+        <li class="traffic-nav-link active"><a id="weekly" href="#">Weekly</a></li>
+        <li class="traffic-nav-link"><a id="monthly" href="#">Monthly</a></li>
+      </ul>
+    </nav>
+    <div class="widget-container-full">
+      <canvas id="traffic-chart" height="100vh"></canvas>
+    </div>
+    <script>
+    let trafficChart = document.getElementById('traffic-chart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Work Sans';
+    Chart.defaults.global.defaultFontSize = 12;
+    Chart.defaults.global.defaultFontColor = 'rgb(119,119,119)';
+
+    let myTrafficChart = new Chart(trafficChart, {
+      type: 'line',
+      data: {
+        labels: ["16 - 22", "23 - 29", "30 - 5", "6 - 12", "13 - 19", "20 - 26", "27 - 3", "4 - 10", "11 - 17", "18 - 24", "25 - 31"],
+        yLabels: ["500", "1000", "1500", "2000", "2500"],
+        datasets: [
+          {
+            label: "Traffic Chart",
+            fill: true,
+            borderColor: 'rgba(115,119,191,0.5)',
+            borderWidth: 2,
+            lineTension: 0,
+            data: [750, 1250, 1100, 1400, 1800, 1400, 1500, 1000, 1500, 2000, 1500, 2000],
+            pointStyle: 'circle',
+            pointRadius: 5,
+            pointBorderColor: 'rgba(115,119,191,1)',
+            backgroundColor: 'rgba(115,119,191,0.1)',
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            type: 'linear',
+              ticks: {
+                max: 2500,
+                min: 500,
+                stepSize: 500
+              }
+          }]
+        }
+      }
+    });
+  </script>
+  </div><!--End lineChart-->
+
+  <div class="barsChart">
+    <h3>Daily Traffic</h3>
+      <div class="widget-container-half">
+        <canvas id="daily-chart"></canvas>
+      </div>
+    <script>
+    let myBarChart = document.getElementById('daily-chart').getContext('2d');
+
+    let barChart = new Chart(myBarChart, {
+      type: 'bar',
+      data: {
+        labels: ["S", "M", "T", "W", "T", "F", "S"],
+        yLabels: ["50", "100", "150", "200", "250"],
+        datasets: [
+          {
+            label: "Daily Traffic",
+            fill: true,
+            lineTension: 0,
+            backgroundColor: "rgb(115,119,191)",
+            data: [75, 100, 175, 125, 225, 200, 100],
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            type: 'linear',
+              ticks: {
+                max: 250,
+                min: 50,
+                stepSize: 50
+              }
+          }]
+        }
+      }
+    });
+  </script>
+  </div><!--barsChart-->
+  
+
+  <div class="doughnutChart">
+    <h3>Mobile Users</h3>
+    <div class="widget-container-half">
+      <canvas id="mobile-users" height="180" width="400"></canvas>
+    </div> 
+    <script>
+      let myDoughnutChart = document.getElementById('mobile-users').getContext('2d');
+      let DoughnutChart = new Chart(myDoughnutChart, {
+        type: 'doughnut',
+        data: {
+          labels:['Phones', 'Tablets', 'Desktop'],
+          datasets:[{
+            label: 'Mobile Traffic',
+            data: [
+              60,
+              50,
+              250
+            ],
+            backgroundColor: [
+              'rgb(116,177,191)',
+              'rgb(129,201,143)',
+              'rgb(115,119,191)'
+            ]
+          }]
+        },
+        options: {
+          legend: {
+            display: true,
+            position: 'right',
+            labels: {
+              fontColor: 'rgb(119,119,119)'
+            }
+          },
+          layout: {
+            padding: {
+              left: 0,
+              right: 40,
+              bottom: 0,
+              top: 0
+            }
+          },
+          tooltips: {
+            enable: true
+          }
+        }
+      });
+    </script>
+  </div>
+
+  <div class="socialStats">
+    <h3>Social Stats</h3>
+
+    <div class="social-container">    
+      <div class="card">
+        <div class="round-bg">
+          <img class="twitter-icon" src="icons/icon-twitter.svg" onerror="this.onerror=null; this.src='icons/icon-twitter.svg'">
+        </div>
+        <div class="social-text">
+          <h3 class="soc-media-heading">twitter</h3>
+          <p class="soc-media-count">10,345</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="round-bg">
+          <img class="facebook-icon" src="icons/icon-facebook.svg" onerror="this.onerror=null; this.src='icons/icon-facebook.svg'">
+        </div>
+        <div class="social-text">
+          <h3 class="soc-media-heading">facebook</h3>
+          <p class="soc-media-count">8,739</p> 
+        </div>      
+      </div>
+      
+      <div class="card"> 
+        <div class="round-bg">
+          <img class="googlePlus-icon" src="icons/icon-google-plus.svg" onerror="this.onerror=null; this.src='icons/icon-google-plus.svg'">
+        </div>
+        <div class="social-text">
+          <h3 class="soc-media-heading">google+</h3>
+          <p class="soc-media-count">2,530</p>
+        </div>
+      </div>                 
+    </div><!--socialContainer-->
+
+  </div><!--socialStats-->
+
+  <div class="newMembers">
+    <h3>New Members</h3>
+
+    <div class="member-inner"> 
+      <div>
+        <img src="images/member-1.jpg" alt="Vicky Chambers" class="member-photo">
+      </div>
+      <div class="members-text">
+        <p class="member-name">Vicky Chambers</p>
+        <p class="member-email"><a href="#">vicky.chambers@example.com</a></p>
+      </div>
+      <p class="date">11/10/18</p>
+    </div>
+
+    <div class="member-inner"> 
+      <div>
+        <img src="images/member-2.jpg" alt="Dan Ross" class="member-photo">
+      </div>
+      <div class="members-text">
+        <p class="member-name">Dan Ross</p>
+        <p class="member-email"><a href="#">dan.ross@example.com</a></p>
+      </div>
+      <p class="date">08/10/18</p>
+    </div>
+
+    <div class="member-inner"> 
+      <div>
+        <img src="images/member-3.jpg" alt="Amy Hill" class="member-photo">
+      </div>
+      <div class="members-text">
+        <p class="member-name">Amy Hill</p>
+        <p class="member-email"><a href="#">amy.hill@example.com</a></p>
+      </div>
+      <p class="date">16/08/18</p>
+    </div>
+
+    <div class="member-inner"> 
+      <div>
+        <img src="images/member-4.jpg" alt="Ryan Jones" class="member-photo">
+      </div>
+      <div class="members-text">
+        <p class="member-name">Ryan Jones</p>
+        <p class="member-email"><a href="#">ryan.jones@example.com</a></p>
+      </div>
+      <p class="date">15/06/18</p>
+    </div>
+
+  </div><!-- End NewMembers-->
+  
+  <div class="recentActivities">
+    <h3>Recent Activities</h3>
+
+    <div class="member-inner"> 
+      <div>
+        <img src="images/member-1.jpg" alt="Vicky Chambers" class="member-photo">
+      </div>
+      <div class="members-text">
+        <p class="member-comment">Vicky Chambers commented on YourApp</p>
+        <p class="time-posted">4 hours ago</p>
+      </div>
+      <p class="arrow">&gt;</p>
+    </div>
+
+    <div class="member-inner"> 
+      <div>
+        <img src="images/member-2.jpg" alt="Dan Ross" class="member-photo">
+      </div>
+      <div class="members-text">
+        <p class="member-comment">Dan Ross like the post Facebook's Changes for 2016</p>
+        <p class="time-posted">5 hours ago</p>
+      </div>
+      <p class="arrow">&gt;</p>
+    </div>
+
+    <div class="member-inner"> 
+      <div>
+        <img src="images/member-3.jpg" alt="Amy Hill" class="member-photo">
+      </div>
+      <div class="members-text">
+        <p class="member-comment">Amy Hill commented on Facebook's Changes for 2016</p>
+        <p class="time-posted">5 hours ago</p>
+      </div>
+      <p class="arrow">&gt;</p>
+    </div>
+
+    <div class="member-inner"> 
+      <div>
+        <img src="images/member-4.jpg" alt="Ryan Jones" class="member-photo">
+      </div>
+      <div class="members-text">
+        <p class="member-comment">Ryan Jones posted YourApp's SEO Tips</p>
+        <p class="time-posted">1 day ago</p>
+      </div>
+      <p class="arrow">&gt;</p>
+    </div>
+
+
+  </div>
+  
+  <div class="messageUser">
+    <h3>Message User</h3>
+      <form action="index.html" method="post">
+        <input  type="search" id="user-search" name="user-search" placeholder="Search for user">
+        <textarea id="user-message" placeholder="Message for user" name="message"></textarea>
+        <button type="submit" class="btn-send">Send</button>
+      </form>
+  </div>
+ 
+  <div class="settings">
+    <h3>Settings</h3>
+    <form>
+      <div class="toggle">
+        <label>Send Email Notifications<input type="checkbox" class="toggle-switch"></input></label>
+        <label>Set Profile to Public<input type="checkbox" class="toggle-switch"></input></label>
+      </div>
+      <select>
+        <option value="-12.0">Select Timezone</option>
+        <option value="-11.0">(GMT -11:00) Midway Island, Samoa</option>
+        <option value="-10.0">(GMT -10:00) Hawaii</option>
+        <option value="-9.0">(GMT -9:00) Alaska</option>
+        <option value="-8.0">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
+        <option value="-7.0">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+        <option value="-6.0">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
+        <option value="-5.0">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
+        <option value="-4.0">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+        <option value="-3.5">(GMT -3:30) Newfoundland</option>
+        <option value="-3.0">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+        <option value="-2.0">(GMT -2:00) Mid-Atlantic</option>
+        <option value="-1.0">(GMT -1:00 hour) Azores, Cape Verde Islands</option>
+        <option value="0.0">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
+        <option value="1.0">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</option>
+        <option value="2.0">(GMT +2:00) Kaliningrad, South Africa</option>
+        <option value="3.0">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+        <option value="3.5">(GMT +3:30) Tehran</option>
+        <option value="4.0">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+        <option value="4.5">(GMT +4:30) Kabul</option>
+        <option value="5.0">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+        <option value="5.5">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
+        <option value="5.75">(GMT +5:45) Kathmandu</option>
+        <option value="6.0">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+        <option value="7.0">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+        <option value="8.0">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+        <option value="9.0">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+        <option value="9.5">(GMT +9:30) Adelaide, Darwin</option>
+        <option value="10.0">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+        <option value="11.0">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+        <option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+      </select>
+      <div class="btn-settings">
+        <button type="submit" class="btn-save">Save</button>
+        <button type="submit" class="btn-cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+</div><!-- End wrapper-->
+	
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script src="js/mycharts.js"></script>	
+</body>
+</html>
