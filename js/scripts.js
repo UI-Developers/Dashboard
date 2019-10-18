@@ -1,13 +1,13 @@
 // JS - Alert Banner
 
-const alert = document .getElementById( "alert" );
+const alert = document.getElementById( "alert" );
 
 // create the html for the banner
 alert.innerHTML = `<div class="alert-banner">
 	<p><strong>Alert:</strong> You have <strong>6</strong> overdue tasks
 	to complete</p>
-	<a href="#"><p class="alert-banner-close">&times;</p></a>
-</div>`;
+	<a href="javascript:void(0);"><p class="alert-banner-close">&times;</p></a>
+  </div>`;
 
 // add event listener to close button
 alert.addEventListener( 'click' , e => {
@@ -18,19 +18,61 @@ alert.addEventListener( 'click' , e => {
 });
 
 // JS - Messaging Section
-const user = document .getElementById( "user-search" );
-const message = document .getElementById( "user-message" );
-const send = document .getElementByClassName( "btn-send" );
+const user = document.getElementById("user-search");
+const message = document.getElementById("user-message");
+const send = document.getElementById("btn-send");
+const messageUser = document.getElementById("messageUser");
 
-send.addEventListener( 'click' , () => {
-// ensure user and message fields are filled out
-if (user.value === "" && message.value === "" ) {
-	alert( "Please fill out user and message fields before sending" );
-	} else if (user.value === "" ) {
-		alert( "Please fill out user field before sending" );
-	} else if (message.value === "" ) {
-		alert( "Please fill out message field before sending" );
-	} else {
-		alert( `Message successfully sent to: ${user.value}` );
+function displayMessage(outcomeMessage) {
+	messageUser.innerHTML = `<spam>`+ outcomeMessage +`</spam>`;
+	message.value = "";
+	user.value = "";
+}
+
+// add event listener to close button Message User
+messageUser.addEventListener( 'click' , e => { 
+	const element = e.target;
+		if (element.classList.contains( "messageOutcome-close" )) {
+		messageUser.style.display = "none";
 	}
 });
+
+
+const ul = document.getElementById('ul');
+const messageInput = document.getElementById('user-message');
+const usernameInput = document.getElementById('user-search');
+const btnClose = document.getElementsByClassName('btn-close');
+let li = document.createElement('li');
+
+function receivedNotification() {
+	li.innerHTML += '<li><a><span class="green-circle">&#9679;</span>' + usernameInput.value + ': ' + messageInput.value + '<button class="btn-close">&times;</button></a></li>';
+	ul.appendChild(li);
+}
+
+document.addEventListener('click', function(e) {
+	if (e.target.className == 'btn-close') {
+		let li = e.target.parentNode;
+		let ul = li.parentNode;
+		ul.removeChild(li);
+	}
+});
+
+send.addEventListener( 'click' , function() {
+// ensure user and message fields are filled out
+var outcomeMessage;
+if (user.value === "" && message.value === "" ) {
+		outcomeMessage = "<p class='messageOutcome-error'>Please fill out user and message fields before sending</p>";
+	} else if (user.value === "" ) {
+		outcomeMessage = "<p class='messageOutcome-error'>Please fill out user field before sending</p>";
+	} else if (message.value === "" ) {
+		outcomeMessage = "<p class='messageOutcome-error'>Please fill out message field before sending</p>";
+	} else {
+		outcomeMessage = `<p class='messageOutcome-success'>Message successfully sent to: ${user.value}<a href="javascript:void(0);"><span class="messageOutcome-close">&times;</span></a></p>`;
+	}
+	var argument = [message.value, user.value];
+	receivedNotification(...argument);
+	displayMessage(outcomeMessage);
+});
+
+
+

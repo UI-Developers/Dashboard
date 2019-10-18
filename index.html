@@ -19,9 +19,14 @@
     <header class="main-header">
       <div class="clearfix">
         <h1 class="name"><a href="#">Your<span id="logoFont">App&trade;</span></a></h1>
-        <div class="avatar-details">
-          <img class="icon-bell" src="icons/icon-bell.svg">
-          <!-- <div id="notifications">container element for our notifications</div> --> 
+        <div class="avatar-details dropdown">
+          <a href="#"><span class="nav-notification">&#9679;</span></a>
+          <a href="#"><img class="icon-bell" src="icons/icon-bell.svg"></a>
+          <div class="dropdown-content" id="notification-list">
+            <ul id="ul">
+              <!-- javaScript goes here -->
+            </ul>
+          </div> 
           <span class="separator"></span>
           <img class="img-avatar" src="images/member-3.jpg" alt="member">
           <span class="name-avatar">Amy Hill</span>
@@ -83,18 +88,22 @@
     Chart.defaults.global.defaultFontColor = 'rgb(119,119,119)';
 
     let myTrafficChart = new Chart(trafficChart, {
+      aspectRatio: 2.5,
+      animation: {
+      duration: 0
+      },
       type: 'line',
       data: {
-        labels: ["16 - 22", "23 - 29", "30 - 5", "6 - 12", "13 - 19", "20 - 26", "27 - 3", "4 - 10", "11 - 17", "18 - 24", "25 - 31"],
+        labels: ["16-22", "23-29", "30-5", "6-12", "13-19", "20-26", "27-3", "4-10", "11-17", "18-24", "25-31"],
         yLabels: ["500", "1000", "1500", "2000", "2500"],
         datasets: [
           {
             label: "Traffic Chart",
             fill: true,
             borderColor: 'rgba(115,119,191,0.5)',
-            borderWidth: 2,
+            borderWidth: 1,
             lineTension: 0,
-            data: [750, 1250, 1100, 1400, 1800, 1400, 1500, 1000, 1500, 2000, 1500, 2000],
+            data: [750, 1250, 1000, 2000, 1500, 1750, 1250, 1850, 2250, 1500, 2500],
             pointStyle: 'circle',
             pointRadius: 5,
             pointBorderColor: 'rgba(115,119,191,1)',
@@ -110,9 +119,7 @@
           yAxes: [{
             type: 'linear',
               ticks: {
-                max: 2500,
-                min: 500,
-                stepSize: 500
+                beginAtZero: true
               }
           }]
         }
@@ -130,6 +137,10 @@
     let myBarChart = document.getElementById('daily-chart').getContext('2d');
 
     let barChart = new Chart(myBarChart, {
+      aspectRatio: 2.5,
+      animation: {
+      duration: 0
+      },
       type: 'bar',
       data: {
         labels: ["S", "M", "T", "W", "T", "F", "S"],
@@ -172,16 +183,17 @@
     <script>
       let myDoughnutChart = document.getElementById('mobile-users').getContext('2d');
       let DoughnutChart = new Chart(myDoughnutChart, {
+        aspectRatio: 2.5,
+        animation: {
+        duration: 0
+        },
         type: 'doughnut',
         data: {
-          labels:['Phones', 'Tablets', 'Desktop'],
+          labels:['Desktop', 'Tablets', 'Phones'],
           datasets:[{
             label: 'Mobile Traffic',
-            data: [
-              60,
-              50,
-              250
-            ],
+            borderWidth: 0,
+            data: [2000, 550, 500],
             backgroundColor: [
               'rgb(116,177,191)',
               'rgb(129,201,143)',
@@ -194,13 +206,13 @@
             display: true,
             position: 'right',
             labels: {
-              fontColor: 'rgb(119,119,119)'
+            fontColor: 'rgb(119,119,119)'
             }
           },
           layout: {
             padding: {
               left: 0,
-              right: 40,
+              right: 0,
               bottom: 0,
               top: 0
             }
@@ -350,11 +362,14 @@
   </div>
   
   <div class="messageUser">
+    <div id="messageUser">
+      <!-- js insert here -->
+    </div>
     <h3>Message User</h3>
-      <form action="index.html" method="post">
-        <input  type="search" id="user-search" name="user-search" placeholder="Search for user">
-        <textarea id="user-message" placeholder="Message for user" name="message"></textarea>
-        <button type="submit" class="btn-send">Send</button>
+      <form onsubmit="event.preventDefault()">
+        <input  type="search" id="user-search" name="user-search" placeholder="Your Name">
+        <textarea id="user-message" placeholder="Your Message" name="message"></textarea>
+        <button id="btn-send" class="btn-send">Send</button>
       </form>
   </div>
  
