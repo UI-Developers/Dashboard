@@ -69,109 +69,23 @@
   <div class="lineChart">
     <h3>Traffic</h3>
     <nav>
-      <ul class="traffic-nav">
-        <li class="traffic-nav-link"><a id="hourly" href="#">Hourly</a></li>
-        <li class="traffic-nav-link"><a id="daily" href="#">Daily</a></li>
-        <li class="traffic-nav-link active"><a id="weekly" href="#">Weekly</a></li>
-        <li class="traffic-nav-link"><a id="monthly" href="#">Monthly</a></li>
+      <ul class="traffic-nav" id="traffic-nav">
+        <li class="traffic-nav-link">Hourly</li>
+        <li class="traffic-nav-link">Daily</li>
+        <li class="active">Weekly</li>
+        <li class="traffic-nav-link">Monthly</li>
       </ul>
     </nav>
     <div class="widget-container-full">
-      <canvas id="traffic-chart" height="100vh"></canvas>
+      <canvas id="traffic-chart"></canvas>
     </div>
-    <script>
-    let trafficChart = document.getElementById('traffic-chart').getContext('2d');
-
-    // Global Options
-    Chart.defaults.global.defaultFontFamily = 'Work Sans';
-    Chart.defaults.global.defaultFontSize = 12;
-    Chart.defaults.global.defaultFontColor = 'rgb(119,119,119)';
-
-    let myTrafficChart = new Chart(trafficChart, {
-      aspectRatio: 2.5,
-      animation: {
-      duration: 0
-      },
-      type: 'line',
-      data: {
-        labels: ["16-22", "23-29", "30-5", "6-12", "13-19", "20-26", "27-3", "4-10", "11-17", "18-24", "25-31"],
-        yLabels: ["500", "1000", "1500", "2000", "2500"],
-        datasets: [
-          {
-            label: "Traffic Chart",
-            fill: true,
-            borderColor: 'rgba(115,119,191,0.5)',
-            borderWidth: 1,
-            lineTension: 0,
-            data: [750, 1250, 1000, 2000, 1500, 1750, 1250, 1850, 2250, 1500, 2500],
-            pointStyle: 'circle',
-            pointRadius: 5,
-            pointBorderColor: 'rgba(115,119,191,1)',
-            backgroundColor: 'rgba(115,119,191,0.1)',
-          }
-        ]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        scales: {
-          yAxes: [{
-            type: 'linear',
-              ticks: {
-                beginAtZero: true
-              }
-          }]
-        }
-      }
-    });
-  </script>
-  </div><!--End lineChart-->
+  </div><!--lineChart-->
 
   <div class="barsChart">
     <h3>Daily Traffic</h3>
       <div class="widget-container-half">
         <canvas id="daily-chart"></canvas>
       </div>
-    <script>
-    let myBarChart = document.getElementById('daily-chart').getContext('2d');
-
-    let barChart = new Chart(myBarChart, {
-      aspectRatio: 2.5,
-      animation: {
-      duration: 0
-      },
-      type: 'bar',
-      data: {
-        labels: ["S", "M", "T", "W", "T", "F", "S"],
-        yLabels: ["50", "100", "150", "200", "250"],
-        datasets: [
-          {
-            label: "Daily Traffic",
-            fill: true,
-            lineTension: 0,
-            backgroundColor: "rgb(115,119,191)",
-            data: [75, 100, 175, 125, 225, 200, 100],
-          }
-        ]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        scales: {
-          yAxes: [{
-            type: 'linear',
-              ticks: {
-                max: 250,
-                min: 50,
-                stepSize: 50
-              }
-          }]
-        }
-      }
-    });
-  </script>
   </div><!--barsChart-->
   
 
@@ -180,50 +94,7 @@
     <div class="widget-container-half">
       <canvas id="mobile-users" height="180" width="400"></canvas>
     </div> 
-    <script>
-      let myDoughnutChart = document.getElementById('mobile-users').getContext('2d');
-      let DoughnutChart = new Chart(myDoughnutChart, {
-        aspectRatio: 2.5,
-        animation: {
-        duration: 0
-        },
-        type: 'doughnut',
-        data: {
-          labels:['Desktop', 'Tablets', 'Phones'],
-          datasets:[{
-            label: 'Mobile Traffic',
-            borderWidth: 0,
-            data: [2000, 550, 500],
-            backgroundColor: [
-              'rgb(116,177,191)',
-              'rgb(129,201,143)',
-              'rgb(115,119,191)'
-            ]
-          }]
-        },
-        options: {
-          legend: {
-            display: true,
-            position: 'right',
-            labels: {
-            fontColor: 'rgb(119,119,119)'
-            }
-          },
-          layout: {
-            padding: {
-              left: 0,
-              right: 0,
-              bottom: 0,
-              top: 0
-            }
-          },
-          tooltips: {
-            enable: true
-          }
-        }
-      });
-    </script>
-  </div>
+  </div><!--doughnutChart-->
 
   <div class="socialStats">
     <h3>Social Stats</h3>

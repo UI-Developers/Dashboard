@@ -38,6 +38,7 @@ messageUser.addEventListener( 'click' , e => {
 });
 
 
+// bell notification messages
 const ul = document.getElementById('ul');
 const messageInput = document.getElementById('user-message');
 const usernameInput = document.getElementById('user-search');

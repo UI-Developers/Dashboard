@@ -18,10 +18,10 @@
 }
 @media (min-width: 1024px) { 
   .widget-container-full {
-    width: 87vw;
+    width: 86vw;
   }
   #traffic-chart {
-    height: 95px;
+    height: 75vh!important;
   }
 }
 
@@ -126,6 +126,15 @@
   .dropdown-content {
     right: 100px;
   }
+}
+
+/*Animation bell notification*/
+.icon-bell {
+  transition: all .2s ease-in-out;
+}
+
+.icon-bell:hover {
+  transform: scale(1.1);
 }
 
 /* Links inside the dropdown */
@@ -257,37 +266,35 @@ input[id="search"] {
   float: left;
 }
 
-.traffic-nav li a {
+.traffic-nav li {
   margin-left: 0px;
   padding: 3px 8px 3px 8px;
   font-size: 13px;
   font-weight: 400;
   border-radius: 15px;
   text-align: center;
+  cursor: pointer;
 }
 @media (min-width: 768px) {
-  .traffic-nav li a {
+  .traffic-nav li {
     padding: 6px 10px 6px 10px;
     margin-left: 15px;
     font-size: 15px;
   }
 }
 
-.traffic-nav li a:hover {
-  color: black;
+.traffic-nav-link {
+  background-color: #ffffff;
+}
+
+.traffic-nav-link:hover {
   font-weight: 500;
 }
 
-.traffic-nav li.active a {
+.active {
+  color: #ffffff;
   background-color: rgb(122,211,139);
-  font-weight: 400;
-  color: rgb(255,255,255)!important;
 }
-
-.traffic-nav li.active a:hover {
-  font-weight: 500;
-}
-
 
 /* ---- New Members ---- */
 
