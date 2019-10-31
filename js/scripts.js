@@ -38,12 +38,13 @@ messageUser.addEventListener( 'click' , e => {
 });
 
 // new notifications indicator 
+const messageIndicator = document.getElementById('notification'); 
 function refreshNotificationIcon() {
-	var notification = document.getElementById('ul').getElementsByTagName('li');
-	if (notification.length > 0) {
-		document.getElementById('notification').style.visibility="visible";
+	var newUserMessage = document.getElementById('ul').getElementsByTagName('li');
+	if (newUserMessage.length > 0) {
+		messageIndicator.style.visibility="visible";
 	} else {
-		document.getElementById('notification').style.visibility="hidden";
+		messageIndicator.style.visibility="hidden";
 	}
 }
 refreshNotificationIcon();
