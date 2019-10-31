@@ -37,24 +37,38 @@ messageUser.addEventListener( 'click' , e => {
 	}
 });
 
+// new notifications indicator 
+function refreshNotificationIcon() {
+	var notification = document.getElementById('ul').getElementsByTagName('li');
+	if (notification.length > 0) {
+		document.getElementById('notification').style.visibility="visible";
+	} else {
+		document.getElementById('notification').style.visibility="hidden";
+	}
+}
+refreshNotificationIcon();
+
 
 // bell notification messages
 const ul = document.getElementById('ul');
 const messageInput = document.getElementById('user-message');
 const usernameInput = document.getElementById('user-search');
 const btnClose = document.getElementsByClassName('btn-close');
-let li = document.createElement('li');
 
 function receivedNotification() {
-	li.innerHTML += '<li><a><span class="green-circle">&#9679;</span>' + usernameInput.value + ': ' + messageInput.value + '<button class="btn-close">&times;</button></a></li>';
+	let li = document.createElement('li');
+	li.innerHTML += '<a><span class="green-circle">&#9679;</span>' + usernameInput.value + ': ' + messageInput.value + '<button class="btn-close">&times;</button></a>';
 	ul.appendChild(li);
+	refreshNotificationIcon();
 }
 
+// Remove Notification
 document.addEventListener('click', function(e) {
 	if (e.target.className == 'btn-close') {
-		let li = e.target.parentNode;
-		let ul = li.parentNode;
-		ul.removeChild(li);
+		let li = e.target.parentNode.parentNode;
+		let ulList = li.parentNode;
+		ulList.removeChild(li);
+		refreshNotificationIcon();
 	}
 });
 
