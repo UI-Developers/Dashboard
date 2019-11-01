@@ -1,6 +1,12 @@
-// JS - Alert Banner
-
-const alert = document.getElementById( "alert" );
+const alert = document.getElementById("alert");
+const user = document.getElementById("user-search");
+const message = document.getElementById("user-message");
+const send = document.getElementById("btn-send");
+const messageUser = document.getElementById("messageUser");
+const ul = document.getElementById('ul');
+const messageInput = document.getElementById('user-message');
+const usernameInput = document.getElementById('user-search');
+const btnClose = document.getElementsByClassName('btn-close');
 
 // create the html for the banner
 alert.innerHTML = `<div class="alert-banner">
@@ -18,15 +24,11 @@ alert.addEventListener( 'click' , e => {
 });
 
 // JS - Messaging Section
-const user = document.getElementById("user-search");
-const message = document.getElementById("user-message");
-const send = document.getElementById("btn-send");
-const messageUser = document.getElementById("messageUser");
-
 function displayMessage(outcomeMessage) {
 	messageUser.innerHTML = `<spam>`+ outcomeMessage +`</spam>`;
 	message.value = "";
 	user.value = "";
+	messageUser.style.display = "";
 }
 
 // add event listener to close button Message User
@@ -51,15 +53,12 @@ refreshNotificationIcon();
 
 
 // bell notification messages
-const ul = document.getElementById('ul');
-const messageInput = document.getElementById('user-message');
-const usernameInput = document.getElementById('user-search');
-const btnClose = document.getElementsByClassName('btn-close');
-
 function receivedNotification() {
-	let li = document.createElement('li');
-	li.innerHTML += '<a><span class="green-circle">&#9679;</span>' + usernameInput.value + ': ' + messageInput.value + '<button class="btn-close">&times;</button></a>';
-	ul.appendChild(li);
+	if (usernameInput.value !== "" && messageInput.value !== "") {
+		let li = document.createElement('li');
+		li.innerHTML += '<a><span class="green-circle">&#9679;</span>' + usernameInput.value + ': ' + messageInput.value + '<button class="btn-close">&times;</button></a>';
+		ul.appendChild(li);
+	}
 	refreshNotificationIcon();
 }
 
