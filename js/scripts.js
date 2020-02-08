@@ -6,7 +6,6 @@ const messageUser = document.getElementById("messageUser");
 const ul = document.getElementById('ul');
 const messageInput = document.getElementById('user-message');
 const usernameInput = document.getElementById('user-search');
-const btnClose = document.getElementsByClassName('btn-close');
 
 // create the html for the banner
 alert.innerHTML = `<div class="alert-banner">
@@ -19,7 +18,7 @@ alert.innerHTML = `<div class="alert-banner">
 alert.addEventListener( 'click' , e => {
 	const element = e.target;
 		if (element.classList.contains( "alert-banner-close" )) {
-		alert.style.display = "none"
+		alert.style.display = "none";
 	}
 });
 
@@ -88,6 +87,3 @@ if (user.value === "" && message.value === "" ) {
 	receivedNotification(...argument);
 	displayMessage(outcomeMessage);
 });
-
-
-
