@@ -51,7 +51,17 @@ function refreshNotificationIcon() {
 refreshNotificationIcon();
 
 
-// bell notification messages
+// bell notification for two standard messages messages
+let li = document.createElement('li');
+li.innerHTML += '<a><span class="green-circle">&#9679;</span>' + 'Giuseppe' + ': ' + 'This is a test 1' + '<button class="btn-close">&times;</button></a>';
+ul.appendChild(li);
+li = document.createElement('li');
+li.innerHTML += '<a><span class="green-circle">&#9679;</span>' + 'Charlie' + ': ' + 'This is a test 2' + '<button class="btn-close">&times;</button></a>';
+ul.appendChild(li);
+refreshNotificationIcon();
+
+
+// bell notification submitting messages
 function receivedNotification() {
 	if (usernameInput.value !== "" && messageInput.value !== "") {
 		let li = document.createElement('li');
@@ -87,3 +97,5 @@ if (user.value === "" && message.value === "" ) {
 	receivedNotification(...argument);
 	displayMessage(outcomeMessage);
 });
+
+
