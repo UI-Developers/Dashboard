@@ -1,29 +1,3 @@
-.widget-container-half,
-.widget-container-full {
-  width: 85vw;
-}
-#traffic-chart {
-  height: 55px;
-}
-@media (min-width: 768px) {
-  .widget-container-half {
-    width: 37vw;
-  }
-  .widget-container-full {
-    width: 82vw;
-  }
-  #traffic-chart {
-    height: 85px;
-  }
-}
-@media (min-width: 1024px) { 
-  .widget-container-full {
-    width: 86vw;
-  }
-  #traffic-chart {
-    height: 75vh!important;
-  }
-}
 
 * {
   box-sizing: border-box;
@@ -39,7 +13,8 @@
 }
 
 .wrapper {
-  max-width: 1450px;
+  width: 100%;
+  max-width: 1920px;
   margin: 0 auto;
 }
 
@@ -613,6 +588,70 @@ label {
 }
 
 
+/* ---- Canvas ---- */
+
+canvas {
+  vertical-align: middle;
+}
+
+canvas {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+canvas {
+  vertical-align: middle;
+}
+
+canvas {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.widget-container-full {
+  max-width: 85vw;
+}
+.widget-container-half {
+  max-width: 85vw;
+}
+#traffic-chart {
+  max-height: 400px;
+}
+
+
+@media (min-width: 768px) {
+  .widget-container-half {
+    width: 37vw;
+  }
+  .widget-container-full {
+    max-width: 87vw;
+  }
+  #traffic-chart {
+    max-height: 250px;
+  }
+}
+@media (min-width: 1024px) { 
+  .widget-container-full {
+    max-width: 100vw;
+  }
+  .widget-container-half {
+    width: 41vw;
+  }
+  #traffic-chart {
+    max-height: 320px;
+  }
+}
+
+@media (min-width: 1500px) {
+  .widget-container-half {
+    width: 43vw;
+  }
+  #traffic-chart {
+    max-height: 450px;
+  }
+}
+
+
 /* ---- Social Stats ---- */
 
 h3 {
@@ -676,11 +715,14 @@ h3 {
 
 .facebook-icon {
   width: 42px;
-  margin-top: 12px;
+  margin-top: 3px;
+}
+.facebook-icon path {
+  fill: rgb(255, 255, 255);
 }
 @media (min-width: 1024px) {
   .facebook-icon {
-    margin-top: 15px;
+    margin-top: 8px;
   }
 }
 
@@ -688,6 +730,9 @@ h3 {
   width: 40px;
   margin-top: 17px;
   margin-left: 2px;
+}
+.twitter-icon path {
+  fill: rgb(255, 255, 255);
 }
 @media (min-width: 1024px) {
   .twitter-icon {
@@ -699,6 +744,9 @@ h3 {
   width: 38px;
   margin-top: 17px;
   margin-left: 8px;
+}
+.googlePlus-icon path {
+  fill: rgb(255, 255, 255);
 }
 @media (min-width: 1024px) {
   .googlePlus-icon {
@@ -787,7 +835,6 @@ h3 {
     top: -13px;
     right: .65em;
   }
-
 }
 
 
@@ -796,5 +843,4 @@ h3 {
   .searchContainer {
     width: 81%;
   }
-
 }
